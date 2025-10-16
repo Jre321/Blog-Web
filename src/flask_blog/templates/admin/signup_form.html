@@ -1,27 +1,29 @@
 {% extends 'base_template.html' %}
 {% block title %}Sign Up - Flask Blog{% endblock %}
 {% block content %}
-  <h1>Sign Up</h1>
-  <form method="post" novalidate>
-    {{ form.hidden_tag() }}
-    <div>
-      {{ form.username.label }}
-      {{ form.username(size=32) }}
-      {% for e in form.username.errors %}<div class="error">{{ e }}</div>{% endfor %}
-    </div>
-    <div>
-      {{ form.email.label }}
-      {{ form.email(size=32) }}
-      {% for e in form.email.errors %}<div class="error">{{ e }}</div>{% endfor %}
-    </div>
-    <div>
-      {{ form.password.label }}
-      {{ form.password(size=32) }}
-      {% for e in form.password.errors %}<div class="error">{{ e }}</div>{% endfor %}
-    </div>
-    <div>
-      {{ form.submit(class_="btn") }}
-    </div>
-  </form>
+  <section class="card">
+    <h1>Sign Up</h1>
+    <form method="post" novalidate>
+      {{ form.hidden_tag() }}
+      <div class="field">
+        {{ form.username.label }}
+        {{ form.username(size=32) }}
+        {% for e in form.username.errors %}<div class="error">{{ e }}</div>{% endfor %}
+      </div>
+      <div class="field">
+        {{ form.email.label }}
+        {{ form.email(size=32) }}
+        {% for e in form.email.errors %}<div class="error">{{ e }}</div>{% endfor %}
+      </div>
+      <div class="field">
+        {{ form.password.label }}
+        {{ form.password(size=32) }}
+        {% for e in form.password.errors %}<div class="error">{{ e }}</div>{% endfor %}
+      </div>
+      <div>
+        {{ form.submit(class_="btn") }}
+      </div>
+    </form>
+  </section>
 {% endblock %}
 

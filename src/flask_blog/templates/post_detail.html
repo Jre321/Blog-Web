@@ -1,9 +1,9 @@
 {% extends 'base_template.html' %}
 {% block title %}{{ post.title }} - Flask Blog{% endblock %}
 {% block content %}
-  <article>
+  <article class="card">
     <h1>{{ post.title }}</h1>
-    {% if post.category %}<p><em>{{ post.category }}</em></p>{% endif %}
+    {% if post.category %}<p class="muted">{{ post.category }}</p>{% endif %}
     <div>
       {{ post.content|e|replace('\n', '<br>')|safe }}
     </div>
