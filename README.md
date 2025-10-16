@@ -40,15 +40,21 @@ You can use the helper script:
 ```
 powershell -ExecutionPolicy Bypass -File scripts/create_db.ps1 -AdminUser postgres
 ```
-Or run the SQL directly:
-```
-psql -U postgres -d postgres -f scripts/create_db.sql
-```
 
 ### Run
 ```
 rye run dev
 ```
+Briefly, to run the project, the following commands must be used in this order:
+```
+- git clone https://github.com/Jre321/Blog-Web.git
+- cd .\Blog-Web\
+- rye sync
+- $env:FLASK_SECRET_KEY = "123456789"
+$env:DATABASE_URL = "postgresql+psycopg://flaskuser:flaskpass@localhost:5432/flask_blog"
+- rye run dev
+```
+
 
 ### Routes
 | Method | Path               | Auth | Description                         |
