@@ -1,9 +1,10 @@
 from __future__ import annotations
 
 from typing import Optional
+from datetime import datetime
 
 from flask_login import UserMixin
-from sqlalchemy import Integer, String, Text, ForeignKey, UniqueConstraint
+from sqlalchemy import Integer, String, Text, ForeignKey, UniqueConstraint, DateTime, func
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from werkzeug.security import generate_password_hash, check_password_hash
 from slugify import slugify
@@ -60,6 +61,7 @@ class Post(db.Model):
     content: Mapped[str] = mapped_column(Text, nullable=False)
     category: Mapped[str] = mapped_column(String(80), nullable=True)
     slug: Mapped[str] = mapped_column(String(255), nullable=False, unique=True)
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now(), nullable=False)
 
     author: Mapped[User] = relationship(back_populates="posts")
 
