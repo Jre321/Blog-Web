@@ -1,0 +1,6 @@
+body { font-family: system-ui, sans-serif; margin: 2rem; }
+nav { display: flex; gap: 1rem; margin-bottom: 1.5rem; }
+.btn { padding: 0.4rem 0.8rem; background: #0d6efd; color: white; border: 0; }
+.error { color: #a00; }
+.flashes { list-style: none; padding: 0; }
+

@@ -1,0 +1,36 @@
+[project]
+name = "flask-blog"
+version = "0.1.0"
+description = "A Flask web app with auth, PostgreSQL, CRUD, and slugs."
+authors = [
+  { name = "Student", email = "student@example.com" }
+]
+requires-python = ">=3.12"
+dependencies = [
+  "flask>=3.1.2",
+  "flask-wtf>=1.2.2",
+  "flask-login>=0.6.3",
+  "flask-sqlalchemy>=3.1.1",
+  "psycopg[binary,pool]>=3.2.10",
+  "python-slugify>=8.0.4",
+  "email-validator>=2.3.0",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.rye]
+managed = true
+dev-dependencies = []
+
+[tool.rye.scripts]
+dev = "flask --app src/flask_blog/run.py --debug run"
+db = "python -c \"from src.flask_blog.run import create_app; app=create_app(); print(app.config['SQLALCHEMY_DATABASE_URI'])\""
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/flask_blog"]
+
+[tool.hatch.metadata]
+allow-direct-references = true
+

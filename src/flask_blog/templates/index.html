@@ -1,0 +1,18 @@
+{% extends 'base_template.html' %}
+{% block title %}Home - Flask Blog{% endblock %}
+{% block content %}
+  <h1>Posts</h1>
+  <ul>
+    {% for post in posts %}
+      <li>
+        <a href="{{ url_for('post_detail', slug=post.slug) }}">{{ post.title }}</a>
+        {% if post.category %}
+          <small>({{ post.category }})</small>
+        {% endif %}
+      </li>
+    {% else %}
+      <li>No posts yet.</li>
+    {% endfor %}
+  </ul>
+{% endblock %}
+
