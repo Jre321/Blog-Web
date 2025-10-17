@@ -55,19 +55,5 @@ $env:DATABASE_URL = "postgresql+psycopg://flaskuser:flaskpass@localhost:5432/fla
 - rye run dev
 ```
 
-
-### Routes
-| Method | Path               | Auth | Description                         |
-|-------:|--------------------|:----:|-------------------------------------|
-| GET    | `/`                |  -   | List posts                          |
-| GET    | `/post/<slug>/`    |  -   | Post detail by slug                 |
-| GET    | `/login`           |  -   | Render login form                   |
-| POST   | `/login`           |  -   | Authenticate user                   |
-| GET    | `/signup/`         |  -   | Render signup form                  |
-| POST   | `/signup/`         |  -   | Create new user + auto-login        |
-| GET    | `/logout`          |  ✓   | Logout current user                 |
-| GET    | `/admin/post/`     |  ✓   | Render create post form             |
-| POST   | `/admin/post/`     |  ✓   | Create post (assign to current user)|
-
 ### Code Style
 All code and comments are in English.
