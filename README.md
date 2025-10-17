@@ -54,6 +54,3 @@ Briefly, to run the project, the following commands must be used in this order:
 $env:DATABASE_URL = "postgresql+psycopg://flaskuser:flaskpass@localhost:5432/flask_blog"
 - rye run dev
 ```
-
-### Code Style
-All code and comments are in English.
