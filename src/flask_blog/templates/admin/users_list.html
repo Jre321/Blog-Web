@@ -1,0 +1,28 @@
+{% extends 'base_template.html' %}
+{% block title %}Usuarios - Flask Blog{% endblock %}
+{% block content %}
+  <section class="card">
+    <h1>👥 Lista de Usuarios</h1>
+    <p class="muted">Información de usuarios registrados (solo para desarrollo)</p>
+    
+    {% if users %}
+    <div class="users-list">
+      {% for user in users %}
+      <div class="user-card" style="border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; padding: 15px; margin-bottom: 15px; background: rgba(255,255,255,0.02);">
+        <h3>👤 {{ user.username }}</h3>
+        <p><strong>📧 Email:</strong> {{ user.email }}</p>
+        <p><strong>🆔 ID:</strong> {{ user.id }}</p>
+        <p><strong>📝 Posts:</strong> {{ user.posts|length }}</p>
+        <p><strong>🔐 Password Hash:</strong> <code style="font-size: 12px; color: var(--muted);">{{ user.password_hash[:30] }}...</code></p>
+      </div>
+      {% endfor %}
+    </div>
+    {% else %}
+    <p class="muted">No hay usuarios registrados.</p>
+    {% endif %}
+    
+    <div style="margin-top: 20px;">
+      <a href="{{ url_for('index') }}" class="btn btn-secondary">← Volver al Inicio</a>
+    </div>
+  </section>
+{% endblock %}

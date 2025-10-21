@@ -94,6 +94,60 @@ def register_routes(app: Flask) -> None:
             return redirect(post.public_url())
         return render_template("admin/post_form.html", form=form)
 
+    @app.route("/admin/post/<slug>/edit/", methods=["GET", "POST"])
+    @login_required
+    def edit_post(slug: str):
+        post = Post.get_by_slug(slug)
+        if not post:
+            abort(404)
+        
+        # Verificar que el usuario actual es el autor del post
+        if post.user_id != current_user.id:
+            flash("No tienes permisos para editar este post", "error")
+            return redirect(url_for("post_detail", slug=slug))
+        
+        form = PostForm(obj=post)
+        if form.validate_on_submit():
+            post.title = form.title.data
+            post.content = form.content.data
+            post.category = form.category.data
+            # Regenerar slug si el título cambió
+            if post.title != form.title.data:
+                post.slug = ""
+            post.save()
+            flash("Post actualizado exitosamente", "success")
+            return redirect(post.public_url())
+        return render_template("admin/post_form.html", form=form, post=post, is_edit=True)
+
+    @app.route("/admin/post/<slug>/delete/", methods=["POST"])
+    @login_required
+    def delete_post(slug: str):
+        post = Post.get_by_slug(slug)
+        if not post:
+            abort(404)
+        
+        # Verificar que el usuario actual es el autor del post
+        if post.user_id != current_user.id:
+            flash("No tienes permisos para eliminar este post", "error")
+            return redirect(url_for("post_detail", slug=slug))
+        
+        try:
+            db.session.delete(post)
+            db.session.commit()
+            flash("Post eliminado exitosamente", "success")
+        except Exception as e:
+            db.session.rollback()
+            flash("Error al eliminar el post", "error")
+        
+        return redirect(url_for("index"))
+
+    @app.route("/admin/users/")
+    @login_required
+    def admin_users():
+        """Vista de administración para ver usuarios (solo para desarrollo)."""
+        users = User.query.all()
+        return render_template("admin/users_list.html", users=users)
+
 
 def create_app() -> Flask:
     app = _create_app()

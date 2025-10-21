@@ -10,6 +10,16 @@
     <div>
       {{ post.content|e|replace('\n', '<br>')|safe }}
     </div>
+    
+    {% if current_user.is_authenticated and current_user.id == post.user_id %}
+    <div class="post-actions" style="margin-top: 20px; padding-top: 20px; border-top: 1px solid #eee;">
+      <a href="{{ url_for('edit_post', slug=post.slug) }}" class="btn btn-primary" style="margin-right: 10px;">Editar Post</a>
+      <form method="POST" action="{{ url_for('delete_post', slug=post.slug) }}" style="display: inline;" onsubmit="return confirm('¿Estás seguro de que quieres eliminar este post? Esta acción no se puede deshacer.');">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+        <button type="submit" class="btn btn-danger">Eliminar Post</button>
+      </form>
+    </div>
+    {% endif %}
   </article>
 {% endblock %}
 
