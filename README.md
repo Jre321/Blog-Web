@@ -25,7 +25,7 @@ rye sync
 ### Environment
 Create a `.env` file (or set environment vars) with:
 ```
-FLASK_SECRET_KEY=change-me
+FLASK_SECRET_KEY="123456789"
 DATABASE_URL=postgresql+psycopg://user:password@localhost:5432/flask_blog
 ```
 
